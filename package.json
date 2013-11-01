@@ -1,0 +1,16 @@
+{
+  "name": "ThinServ",
+  "description": "Thin http server on top of redis",
+  "version": "0.0.1",
+  "author": "Lagoa <join@lagoa.com >",
+  "main": "./thinserv.js",
+  "dependencies": {
+    "redis"     : "0.7.2",
+    "longjohn"  : "0.2.0",
+    "restify"   : "2.6.0"
+  },
+  "devDependencies": {
+    "node-NetworkIP":"git://github.com/Reregistered/Node-NetworkIP"
+  },
+  "engines": { "node": ">= 0.6.0" }
+}
