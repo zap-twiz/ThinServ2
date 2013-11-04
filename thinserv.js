@@ -76,7 +76,7 @@ ThinServer.prototype._get = function(req,res) {
       'Cache-Control': this._cacheControl
     });
 
-    this._rc.get(key, function (err, data) {
+    this._rc.get(redisKey, function (err, data) {
 
       if (!data || !data.length) {
         res.end();
