@@ -19,7 +19,7 @@ function ThinServer(in_params){
 
   // these params (expiration/type) are used every request- just set it here
   this._cacheControl = 'public, max-age=' + (in_params.expiration || 180);
-  this._contentType = (in_params.contentType || 'application/octet-stream');
+  this._contentType = (in_params.contentType || 'text/plain');
   this._redisKeyParser = in_params.redisKeyParser;
 
   this._rc = Redis.createClient(in_params.redis.port,
@@ -83,7 +83,7 @@ ThinServer.prototype._get = function(req,res) {
         return;
       }
 
-      res.write(data, 'binary');
+      res.write(data);
       res.end();
     })
   } catch (err) {
