@@ -51,7 +51,6 @@ ThinServer.prototype._get = function(req,res) {
   req.parsed_url = url.parse(req.url, true);
   var guid = req.parsed_url.query.guid;
   var type = req.parsed_url.query.type;
-  var subType = req.parsed_url.query.subType;
 
   if (!guid) {
     res.end("invalid query: no guid.");
