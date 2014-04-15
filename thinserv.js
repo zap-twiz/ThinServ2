@@ -1,5 +1,5 @@
 /**
- * This is a small asset server used to serve the images.
+ * @fileoverview This is a small asset server used to serve content from redis.
  */
 
 var util = require('util'),
@@ -22,9 +22,11 @@ function ThinServer(in_params){
   this._contentType = (in_params.contentType || 'text/plain');
   this._redisKeyParser = in_params.redisKeyParser;
 
+  console.log('Connecting to redis: ', in_params.redis);
+
   this._rc = Redis.createClient(in_params.redis.port,
-    in_params.redis.host,
-    in_params.redis.options);
+                                in_params.redis.host,
+                                in_params.redis.options);
 
   // inherit from the eventemitters
   EventEmitter.call(this);
@@ -34,7 +36,7 @@ function ThinServer(in_params){
   this._server.get(in_params.route, this._get.bind(this));
   this._server.listen(in_params.port, function(){
 
-    console.log('listening on port %s', in_params.port);
+    console.log('Listening on port %s', in_params.port);
 
     // in production/staging we need to drop down our permissions
     if (in_params.uid){
@@ -82,9 +84,9 @@ ThinServer.prototype._get = function(req,res) {
         return;
       }
 
-      res.write(data);
+      res.write(data, 'binary');
       res.end();
-    })
+    });
   } catch (err) {
     console.error(err)
   }
